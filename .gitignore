@@ -1,0 +1,35 @@
+__pycache__/
+*.pyc
+venv/
+.vscode/
+.DS_Store
+*.so
+*.a
+OpenBLAS/
+venv/
+__pycache__/
+*.pyc
+
+# Скомпилированные файлы
+*.o
+*.so
+*.a
+*.exe
+
+# Результаты тестов
+results/
+*.out
+*.log
+*.txt
+!symm_project/results/README.md
+
+# Временные файлы
+*~
+*.swp
+.DS_Store
+
+# Исполняемые файлы (которые мы не хотим коммитить)
+test_*
+my_*
+!symm_project/Makefile
+!symm_project/src/*.cpp
