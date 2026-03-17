@@ -1,4 +1,4 @@
-# Игнорируем скомпилированные файлы
+
 *.o
 *.so
 *.a
@@ -6,13 +6,11 @@
 test_*
 my_*
 
-# Но НЕ игнорируем исходники
 !my_symm_float.cpp
 !my_symm_double.cpp
 !test_symm_openblas_float.cpp
 !test_symm_openblas_double.cpp
 
-# Временные файлы
 *~
 *.swp
 .DS_Store
