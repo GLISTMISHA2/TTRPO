@@ -62,7 +62,7 @@ private:
                             }
                             temp += aik * B[k * ldb + j];
                         }
-                        C[i * ldc + j] += alpha * temp;
+                        C[i * ldc + j] += 2.0 * alpha * temp;  // BUG: double alpha
                     }
                 }
             });
@@ -100,7 +100,7 @@ private:
                             }
                             temp += B[i * ldb + k] * ajk;
                         }
-                        C[i * ldc + j] += alpha * temp;
+                        C[i * ldc + j] += 2.0 * alpha * temp;  // BUG: double alpha
                     }
                 }
             });
