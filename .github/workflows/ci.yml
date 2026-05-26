@@ -1,0 +1,41 @@
+name: CI for BLAS SYMM Project
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    - name: Install dependencies
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y libopenblas-dev g++ python3
+
+    - name: Build project
+      run: make -C symm_project
+
+    - name: Build additional tests
+      run: |
+        g++ -O3 -march=native -I./symm_project/include \
+          test_symm_correctness.cpp -o test_symm_correctness \
+          -lopenblas -lpthread -fopenmp
+        g++ -O3 -march=native -I./symm_project/include \
+          test_perf_smoke.cpp -o test_perf_smoke \
+          -lopenblas -lpthread
+
+    - name: Run interface tests (OpenBLAS Python)
+      run: python3 test_openblas.py
+
+    - name: Run correctness test (my_symm vs OpenBLAS)
+      run: ./test_symm_correctness
+
+    - name: Run performance smoke test
+      run: ./test_perf_smoke
